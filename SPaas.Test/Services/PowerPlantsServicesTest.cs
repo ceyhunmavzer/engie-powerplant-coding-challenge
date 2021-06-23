@@ -125,7 +125,7 @@ namespace SPaas.Test.Services
             //Act
             var result = _powerPlantService.GetProductionPlan(powerPlants, fuel, load);
             //Assert
-            Assert.AreEqual(result, powerOutput);
+            Assert.AreEqual( powerOutput,result);
             
         }
     }

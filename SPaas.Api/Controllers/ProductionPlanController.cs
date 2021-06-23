@@ -2,6 +2,7 @@ using System.Linq;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using SPaas.Api.Models;
+using SPaas.Services.Interfaces;
 using SPaas.Services.Services;
 
 namespace SPaas.Api.Controllers
@@ -10,12 +11,12 @@ namespace SPaas.Api.Controllers
     [Route("[controller]")]
     public class ProductionPlanController : ControllerBase
     {
-        private readonly PowerPlantService _powerPlantService;
+        private readonly IPowerPlantService _iPowerPlantService;
         private readonly IMapper _mapper;
         
-        public ProductionPlanController(PowerPlantService powerPlantService, IMapper mapper)
+        public ProductionPlanController(IPowerPlantService iPowerPlantService, IMapper mapper)
         {
-            _powerPlantService = powerPlantService;
+            _iPowerPlantService = iPowerPlantService;
             _mapper = mapper;
         }
         
@@ -24,7 +25,7 @@ namespace SPaas.Api.Controllers
         {
             var mappedPowerPlants= request.PowerPlants.Select(x => _mapper.Map<SPaas.Services.DataModels.PowerPlant>(x));
             var mappedFuel = _mapper.Map<SPaas.Services.DataModels.Fuel>(request.Fuels);
-            return Ok(_powerPlantService.GetProductionPlan(mappedPowerPlants, mappedFuel, request.Load));
+            return Ok(_iPowerPlantService.GetProductionPlan(mappedPowerPlants, mappedFuel, request.Load));
         }
     }
 }

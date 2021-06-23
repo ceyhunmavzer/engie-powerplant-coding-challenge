@@ -26,8 +26,7 @@ namespace SPaas.Api
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = "SPaas.Api", Version = "v1"});
             });
-            services.AddTransient<PowerPlantService>();
-            services.AddTransient<IPowerPlantInterface,PowerPlantService>();
+            services.AddTransient<IPowerPlantService,PowerPlantService>();
             services.AddAutoMapper(typeof(Mapper));
         }
 
